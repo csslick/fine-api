@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>상품목록</h1>
+  <p>페이지 번호: <%= data.now_page_no %> </p>
+  <p><%= data.baseList.length %> </p>
+  <p><%= data.optionList.length %> </p>
+  <ul>
+      <% data.baseList.forEach((item, i) => { %>
+        <li>
+          <h4><%= item.kor_co_nm  %></h4>
+          <p>공시제출월: <%= item.dcls_month %></p>
+          <p>금융상품 코드: <%= item.fin_co_no %></p>
+          <p>금융상품명: <%= item.fin_prdt_nm %></p>
+          <p>가입방법: <%= item.join_way %></p>
+          <p>가입대상: <%= item.join_member %></p>
+          <p>금리: 
+              <%  for(x in data.optionList) { 
+                if(data.optionList[x].fin_co_no == item.fin_co_no) { %>
+                  <%= data.optionList[x].intr_rate %>
+              <%  break; }
+               } %> 
+          </p>
+          <p>저축기간: <%= data.optionList[i].save_trm %>개월 </p>
+        </li>
+      <% }) %>
+    </li>
+  </ul>
+</body>
+</html>
